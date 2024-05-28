@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pollApp">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="PollController">
+    <div class="container">
+        <h1>Poll System</h1>
+        <div class="poll">
+            <h2>What is the your preferred programming language? </h2>
+            <div class="options">
+                <div class="option" ng-repeat="option in options">
+                    <input type="radio" id="{{option.id}}" name="poll" ng-value="option.id" ng-model="$parent.selectedOption">
+                    <label for="{{option.id}}">{{option.text}}</label>
+                </div>
+            </div>
+            <button ng-click="submitVote()">Submit Vote</button>
+            <div id="result">
+                <div class="option-result" ng-repeat="option in options">
+                    <span class="option-text">{{option.text}}</span>
+                    <div class="bar-container">
+                        <div class="bar" ng-style="{width: calculatePercentage(option.votes) + '%'}"></div>
+                    </div>
+                    <span class="percentage">{{calculatePercentage(option.votes)}}%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+</html>
